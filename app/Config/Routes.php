@@ -36,6 +36,11 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/api/goods/(:num)', 'Api\Goods');
+$routes->post('/api/goods', 'Api\Goods');
+$routes->put('/api/goods/(:num)', 'Api\Goods');
+$routes->delete('/api/goods/(:num)', 'Api\Goods');
+$routes->patch('/api/goods/(:num)', 'Api\Goods');
 
 /*
  * --------------------------------------------------------------------
