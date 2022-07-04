@@ -25,7 +25,8 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-//$routes->setAutoRoute(false);
+// 정의한 라우팅만 사용.
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -35,12 +36,15 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/api/goods/(:num)', 'Api\Goods');
-$routes->post('/api/goods', 'Api\Goods');
-$routes->put('/api/goods/(:num)', 'Api\Goods');
-$routes->delete('/api/goods/(:num)', 'Api\Goods');
-$routes->patch('/api/goods/(:num)', 'Api\Goods');
+// $routes->get('/', 'Home::index');
+
+
+// 상품 등록/조회 라우트
+$routes->group('api', static function ($routes) {
+    $routes->get('goods', 'Api\Goods::show');
+    $routes->get('goods/(:num)', 'Api\Goods::show/$1');
+    $routes->post('goods', 'Api\Goods::create');
+});
 
 /*
  * --------------------------------------------------------------------
