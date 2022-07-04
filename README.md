@@ -1,63 +1,71 @@
-# CodeIgniter 4 Application Starter
 
-## What is CodeIgniter?
+＊형상관리
+  - Git 
+    GitHub(master) : https://github.com/Yoonseoktae/musinsa/tree/master
+    GitHub(dev) : https://github.com/Yoonseoktae/musinsa/tree/dev
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+  - versioning
+    GitFlow
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+＊AWS 스펙
+  - EC2 (프리티어)
+    유형 : t2.nano
+    EndPoint : ec2-3-38-252-196.ap-northeast-2.compute.amazonaws.com
+  
+  - RDS (프리티어)
+    유형 : db.t3.micro
+    EndPoint : db-musinsa-test.czigkq9mkg4m.ap-northeast-2.rds.amazonaws.com
+    Port : 3306
+    ID : yst
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+＊Server 스펙
+  - Apache : 2.4.53
+  - PHP : 7.4.29
+  - Mysql : 8.0.28
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+＊사용 툴
+  - VSCODE 
+  - NaviCat 
+  - putty
+  - GitHub
+  - GitDesktop
+  - YARC (REST API test - Chrome extension)
 
-## Installation & updates
+＊테스트
+    1. 상품조회 (GET)
+      - http://3.38.252.196/api/goods/1 (단일상품조회)
+      - http://3.38.252.196/api/goods (전체상품조회)
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+    2. 상품등록 (POST)
+      - http://3.38.252.196/api/goods (상품등록)
+payload : {
+  "goods_nm":"aa",
+  "goods_cont":"dd",
+  "com_id":"33"
+}
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+＊이슈 
+    1. LAMP 설치
+      - 이슈 없음.
+      
+    2. CI4 설치
+      - 수동 설치 후 설정중 연속된 에러. (해결)
+        => 수동설치 삭제 후 composer 설치.
+      - CI Call to undefined function CodeIgniter\locale_set_default() 에러.  (해결)
+        => php intl 설치 및 적용 후 아파치 재시작
+      - 디버깅 화면 미노출 (해결)
+        => env > .env 변경 후 CI_ENVIRONMENT = development 변경
 
-## Setup
+    3. Git관련 연동 
+      - GitFlow 개념을 사용할 예정, 
+        버저닝 관리는 작업볼륨이 크지않기에 릴리즈 브랜치방식 사용하지 않고 dev -> master로 머지 커밋명에 명시 예정. 
+      - master브랜치 생성 후 ci소스 연결.
+      - dev브랜치를 master기준으로 생성.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+    4. VScode Remote SSH 연결 
+      - Window OpenSSH서버, 클라이언트 설치 후 VSCODE remote ssh에서 키방식으로 서버에 연결시도하였으나 계속된 권한거부. (해결)
+      => 서버 내 sshd설정 및 권한세팅 완료 후 권한거부 메세지가 달라지긴했으나 여전히 접근이 거부됨.
+      => 클라이언트 ssh config파일의 pem키 위치설정값(IdentityFile) 삭제 후 정상 접근됨.
 
-## Important Change with index.php
-
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
+    5. REST API 개발
+      - 이슈 없음.
